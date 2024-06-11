@@ -1,0 +1,28 @@
+---
+###############################################################################
+# Logrotate (Local Configuration)
+###############################################################################
+# Configure logging local logrotate options.
+#
+# Args:
+#   name: str - name of local config (/etc/logrotate.d/{NAME}).
+#   state: str - whether config should be present or absent.
+#   config: dict - logrotate config, see defaults.yml.
+#
+# Reference:
+# * https://manpages.debian.org/bookworm/logrotate/logrotate.8.en.html
+
+- name: 'Local | remove local config {{ service }}'
+  ansible.builtin.file:
+    path: '/etc/logrotate.d/{{ service }}'
+    state: 'absent'
+  when: state | lower == 'absent'
+
+- name: 'Local | set local config {{ service }}'
+  ansible.builtin.template:
+    src: 'local.conf.j2'
+    dest: '/etc/logrotate.d/{{ service }}'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  when: state | lower == 'present'

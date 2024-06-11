@@ -1,0 +1,25 @@
+---
+###############################################################################
+# Logrotate (Global Configuration)
+###############################################################################
+# Configure logging global logrotate options.
+#
+# Platform defaults can be found with 'logrotate --version'.
+#
+#    Default mail command: /usr/bin/mail
+#    Default state file path: /var/lib/logrotate/status
+#    ACL support: yes
+#    SELinux support: yes
+#
+# TODO(logrotate): Add management of logrotate.d when use case surfaces.
+#
+# Reference:
+# * https://manpages.debian.org/bookworm/logrotate/logrotate.8.en.html
+
+- name: 'Global | set global config'
+  ansible.builtin.template:
+    src: 'global.conf.j2'
+    dest: '/etc/logrotate.conf'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'

@@ -1,0 +1,13 @@
+---
+- name: 'Main | global'
+  ansible.builtin.include_tasks: 'global.yml'
+
+- name: 'Main | local'
+  ansible.builtin.include_tasks: 'local.yml'
+  vars:
+    service: '{{ local.service }}'
+    state: '{{ local.state | default("present") }}'
+    config: '{{ local.config }}'
+  loop: '{{ logrotate_local | default([]) }}'
+  loop_control:
+    loop_var: local

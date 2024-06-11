@@ -1,0 +1,182 @@
+{#- Mirror changes in global.conf.j2 -#}
+{% for item in config %}
+{% for file in item.logs %}
+{{ file }}
+{% endfor %}
+{
+  # rotation
+  rotate {{ item.rotate.count | default('3') }}
+{% if 'old_dir' in item.rotate and item.rotate.old_dir | length > 0 %}
+  olddir {{ item.rotate.old_dir }}
+{% else %}
+  noolddir
+{% endif %}
+{% if 'su' in item.rotate and item.rotate.su | length > 0 %}
+  su {{ item.rotate.su.user }} {{ item.rotate.su.group }}
+{% endif %}
+
+  # frequency
+{% if 'period' in item.rotate and item.rotate.period %}
+  {{ item.rotate.period }}
+{% else %}
+  weekly
+{% endif %}
+
+  # file selection
+{% if 'missing_ok' in item.rotate and item.rotate.missing_ok %}
+  missingok
+{% else %}
+  nomissingok
+{% endif %}
+{% if 'ignore_duplicates' in item.rotate and item.rotate.ignore_duplicates %}
+  ignoreduplicates
+{% endif %}
+{% if 'if_empty' in item.rotate and item.rotate.if_empty %}
+  ifempty
+{% else %}
+  notifempty
+{% endif %}
+{% if 'min_age' in item.rotate and item.rotate.min_age %}
+  minage {{ item.rotate.min_age }}
+{% endif %}
+{% if 'max_age' in item.rotate and item.rotate.max_age %}
+  maxage {{ item.rotate.max_age }}
+{% endif %}
+{% if 'min_size' in item.rotate and item.rotate.min_size %}
+  minsize {{ item.rotate.min_size }}
+{% endif %}
+{% if 'max_size' in item.rotate and item.rotate.max_size %}
+  maxsize {{ item.rotate.max_size }}
+{% endif %}
+{% if 'taboo_ext' in item.rotate and item.rotate.taboo_ext | length > 0 %}
+  tabooext {% if 'taboo_ext_append' in item.rotate and item.rotate.taboo_ext_append %}+{% endif %}{{ item.rotate.taboo_ext | join(', ') }}
+{% endif %}
+{% if 'taboo_pattern' in item.rotate and item.rotate.taboo_pattern | length > 0 %}tabooext {% if 'taboo_pattern_append' in item.rotate and item.rotate.taboo_pattern_append %}+{% endif %}{{ item.rotate.taboo_pattern | join(', ') }}
+{% endif %}
+
+  # files and folders
+{% if 'create' in item.rotate and item.rotate.create | length > 0 %}
+  {{ item.rotate.create }}
+{% else %}
+  nocreate
+{% endif %}
+{% if 'create_old_dir' in item.rotate and item.rotate.create_old_dir | length > 0 %}
+  createolddir {{ item.rotate.create_old_dir.mode }} {{ item.rotate.create_old_dir.user }} {{ item.rotate.create_old_dir.group }}
+{% else %}
+  nocreateolddir
+{% endif %}
+{% if 'copy' in item.rotate and item.rotate.copy %}
+  copy
+{% else %}
+  nocopy
+{% endif %}
+{% if 'copy_truncate' in item.rotate and item.rotate.copy_truncate %}
+  copytruncate
+{% else %}
+  nocopytruncate
+{% endif %}
+{% if 'rename_copy' in item.rotate and item.rotate.rename_copy %}
+  renamecopy
+{% else %}
+  norenamecopy
+{% endif %}
+{% if 'shred' in item.rotate and item.rotate.shred %}
+  shred
+{% else %}
+  noshred
+{% endif %}
+{% if 'shred_cycles_count' in item.rotate and item.rotate.shred_cycles_count > 0 %}
+  shredcycles {{ item.rotate.shred_cycles_count }}
+{% endif %}
+{% if 'allowed_hard_link' in item.rotate and item.rotate.allowed_hard_link %}
+  allowhardlink
+{% else %}
+  noallowhardlink
+{% endif %}
+
+  # compression
+{% if 'compress' in item.rotate and item.rotate.compress %}
+  compress
+{% else %}
+  nocompress
+{% endif %}
+  compresscmd {% if 'compress_cmd' in item.rotate and item.rotate.compress_cmd %}{{ item.rotate.compress_cmd }}{% else %}/bin/gzip{% endif +%}
+  uncompresscmd {% if 'uncompress_cmd' in item.rotate and item.rotate.uncompress_cmd %}{{ item.rotate.uncompress_cmd }}{% else %}/bin/gunzip{% endif +%}
+  compressext {% if 'compress_ext' in item.rotate and item.rotate.compress_ext %}{{ item.rotate.compress_ext }}{% else %}.gz{% endif +%}
+  compressoptions {% if 'compress_options' in item.rotate and item.rotate.compress_options %}{{ item.rotate.compress_options }}{% else %}-6{% endif +%}
+{% if 'delay_compress' in item.rotate and item.rotate.delay_compress %}
+  delaycompress
+{% else %}
+  nodelaycompress
+{% endif %}
+
+  # filenames
+{% if 'extension' in item.rotate and item.rotate.extension %}
+  extension {{ item.rotate.extension }}
+{% endif %}
+{% if 'add_extension' in item.rotate and item.rotate.add_extension %}
+  addextension {{ item.rotate.add_extension }}
+{% endif %}
+{% if 'start' in item.rotate and item.rotate.start %}
+  start {{ item.rotate.start }}
+{% endif %}
+{% if 'date_ext' in item.rotate and item.rotate.date_ext %}
+  dateext
+{% else %}
+  nodateext
+{% endif %}
+{% if 'date_format' in item.rotate and item.rotate.date_format != '-%Y%m%d' %}
+  dateformat {{ item.rotate.date_format }}
+{% endif %}
+{% if 'date_yesterday' in item.rotate and item.rotate.date_yesterday %}
+  dateyesterday
+{% endif %}
+{% if 'date_hour_ago' in item.rotate and item.rotate.date_hour_ago %}
+  datehourago
+{% endif %}
+
+  # mail
+{% if 'mail' in item.rotate and item.rotate.mail| length > 0 %}
+  mail {{ item.rotate.mail }}
+{% else %}
+  nomail
+{% endif %}
+{% if 'mail_first' in item.rotate and item.rotate.mail_first %}
+  mailfirst
+{% else %}
+  maillast
+{% endif %}
+
+  # scripts
+{% if 'shared_scripts' in item.rotate and item.rotate.shared_scripts %}
+  sharedscripts
+{% else %}
+  nosharedscripts
+{% endif %}
+{% if 'first_action' in item.rotate and item.rotate.first_action | length > 0%}
+  firstaction
+    {{ item.rotate.first_action }}
+  endscript
+{% endif %}
+{% if 'last_action' in item.rotate and item.rotate.last_action | length > 0%}
+  firstaction
+    {{ item.rotate.last_action }}
+  endscript
+{% endif %}
+{% if 'pre_rotate' in item.rotate and item.rotate.pre_rotate | length > 0%}
+  firstaction
+    {{ item.rotate.pre_rotate }}
+  endscript
+{% endif %}
+{% if 'post_rotate' in item.rotate and item.rotate.post_rotate | length > 0%}
+  firstaction
+    {{ item.rotate.post_rotate }}
+  endscript
+{% endif %}
+{% if 'pre_remove' in item.rotate and item.rotate.pre_remove | length > 0%}
+  firstaction
+    {{ item.rotate.pre_remove }}
+  endscript
+{% endif %}
+}
+{% endfor %}
