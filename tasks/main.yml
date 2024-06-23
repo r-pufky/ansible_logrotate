@@ -1,8 +1,8 @@
 ---
-- name: 'Main | global'
+- name: 'Global'
   ansible.builtin.include_tasks: 'global.yml'
 
-- name: 'Main | local'
+- name: 'Local'
   ansible.builtin.include_tasks: 'local.yml'
   vars:
     service: '{{ local.service }}'

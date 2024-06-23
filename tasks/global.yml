@@ -11,8 +11,6 @@
 #    ACL support: yes
 #    SELinux support: yes
 #
-# TODO(logrotate): Add management of logrotate.d when use case surfaces.
-#
 # Reference:
 # * https://manpages.debian.org/bookworm/logrotate/logrotate.8.en.html
 

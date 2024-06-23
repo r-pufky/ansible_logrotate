@@ -5,9 +5,9 @@
 # Configure logging local logrotate options.
 #
 # Args:
-#   name: str - name of local config (/etc/logrotate.d/{NAME}).
-#   state: str - whether config should be present or absent.
-#   config: dict - logrotate config, see defaults.yml.
+#   service: str - name of local config (/etc/logrotate.d/{NAME})
+#   state: str - whether config should be present or absent
+#   config: dict - logrotate config, see defaults.yml
 #
 # Reference:
 # * https://manpages.debian.org/bookworm/logrotate/logrotate.8.en.html

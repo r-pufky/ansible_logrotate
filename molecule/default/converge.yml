@@ -1,7 +1,7 @@
 ---
-# role variable returned variables are scoped to the current play only (e.g.
+# Role variable returned variables are scoped to the current play only (e.g.
 # converge.yml) and must be tested between each application of the role. Test
-# these values while converging versus verify.yml (where scoping wll prevent)
+# these values while converging versus verify.yml (where scoping will prevent)
 # testing these values.
 #
 # Idempotent testing disabled as specific commands will never be idempotent.
@@ -16,7 +16,7 @@
   tasks:
     - name: 'Default | converge | configure logrotate'
       ansible.builtin.include_role:
-        name: 'logrotate'
+        name: 'r_pufky.srv.logrotate'
       vars:
         logrotate_local:
           - service: 'dpkg'

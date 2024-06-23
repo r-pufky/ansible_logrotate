@@ -20,12 +20,13 @@
 # Default: 3
 logrotate_count: 3
 
-# Move rotated logs into specified directory. '' disables. Default: ''.
+# Move rotated logs into specified directory. Default: '' (disabled).
 logrotate_old_dir: ''
 
 # Rotate log files under specified user and group.
 #
 # logrotate_su:
+#     dict - user and group definitions.
 #   user: str or int - user name or UID
 #   group: str or int - group name or GID
 #
@@ -46,17 +47,19 @@ logrotate_su: {}
 #            hourly: rotated every hour
 #             daily: rotated every day
 #  weekly [weekday]: rotated once on specified weekday
-#      Values: weekday
-#        0-6: Sunday through Saturday
-#        7: each day
-#        omit: default Sunday
-#           monthly: rotated the first time logrotate is run in a month
-#            yearly: rotated if current year is not the same as last rotation
+#                        Values: weekday
+#                              0-6: Sunday through Saturday
+#                                7: each day
+#                             omit: default Sunday
+#                          monthly: rotated the first time logrotate is run in
+#                                   a month.
+#                           yearly: rotated if current year is not the same as
+#                                   last rotation.
 #     size[postfix]: rotated only if they grow bigger than size bytes
-#      Values: postfix
-#        k: kilobytes
-#        M: megabytes
-#        G: gigabytes
+#                        Values: postfix
+#                          k: kilobytes
+#                          M: megabytes
+#                          G: gigabytes
 #
 # logrotate_period: 'weekly 3'
 # logrotate_period: '100M'
@@ -77,25 +80,46 @@ logrotate_ignore_duplicates: false
 # Rotate log file even if it is empty. Default: True.
 logrotate_if_empty: true
 
-# Do not rotate logs less then minimum age (days). 0 disables. Default: 0.
+# Do not rotate logs less then minimum age (days). Default: 0 (disabled).
 logrotate_min_age: 0
 
-# Remove rotated logs older than maximum age (days). 0 disables. Default: 0.
+# Remove rotated logs older than maximum age (days). Default: 0 (disabled).
 logrotate_max_age: 0
 
 # Log files are rotated when they grow bigger than size bytes.
-# But not before additionally specified time interval.
+#
+# Not before additionally specified time interval.
 #
 # Default: 0 (disabled).
 logrotate_min_size: 0
 
 # Log files are rotated when they grow bigger than size bytes.
+#
 # Before additionally specified time interval.
 #
 # Default: 0 (disabled).
 logrotate_max_size: 0
 
-# Taboo extensions are excluded from processing. Default: See below.
+# Taboo extensions are excluded from processing.
+#
+# Default:
+#   - ',v'
+#   - '.cfsaved'
+#   - '.disabled'
+#   - '.dpkg-bak'
+#   - '.dpkg-del'
+#   - '.dpkg-dist'
+#   - '.dpkg-new'
+#   - '.dpkg-old'
+#   - '.rhn-cfg-tmp-*'
+#   - '.rpmnew'
+#   - '.rpmorig'
+#   - '.rpmsave'
+#   - '.swp'
+#   - '.ucf-dist'
+#   - '.ucf-new'
+#   - '.ucf-old'
+#   - '~'
 logrotate_taboo_ext:
   - ',v'
   - '.cfsaved'
@@ -118,7 +142,7 @@ logrotate_taboo_ext:
 # Append taboo extensions to existing list or replace? Default: False.
 logrotate_taboo_ext_append: false
 
-# Taboo glob pattern list to exclude processing. Default: See below.
+# Taboo glob pattern list to exclude processing. Default: [].
 logrotate_taboo_pattern: []
 
 # Append taboo glob pattern list to existing list or replace? Default: False.
@@ -145,6 +169,7 @@ logrotate_create: ''
 # Create logrotate_old_dir if not existing?
 #
 # logrotate_create_old_dir:
+#     dict - file permission definition.
 #   mode: octal directory permissions
 #   user: user name or UID
 #   group: group name or GID
@@ -163,7 +188,7 @@ logrotate_copy: false
 # Truncate original log file after copying. Default: False.
 logrotate_copy_truncate: false
 
-# Rename log with .tmp extension, run postrotate, then copy to final name.
+# Rename log with .tmp extension, run postrotate, then copy to final name?
 #
 # Default: False.
 logrotate_rename_copy: false
@@ -216,6 +241,7 @@ logrotate_extension: ''
 logrotate_add_extension: ''
 
 # Starting number for rotation.
+#
 # If 0, logs will be created with .0, .1, etc. as they are rotated. They will
 # still be rotated the number of times in logrotate_count.
 #
@@ -223,6 +249,7 @@ logrotate_add_extension: ''
 logrotate_start: 1
 
 # Rotate logs adding a date extension instead of a number.
+#
 # Date extension configured in logrotate_date_format and
 # logrotate_date_yesterday.
 #
@@ -230,7 +257,8 @@ logrotate_start: 1
 logrotate_date_ext: false
 
 # Specify the extension for logrotate_date_ext.
-# Date format specification similiar to strftime(3).
+#
+# Date format specification similar to strftime(3).
 #
 # Only %Y %m %d %H %M %S %V and %s specifiers are allowed.
 #
@@ -240,7 +268,8 @@ logrotate_date_ext: false
 # is because when using the rotate option, logrotate sorts all rotated
 # filenames to find out which logfiles are older and should be removed.
 #
-# Special case: '-%Y%m%d' default value for all except '-%Y%m%d%H' for hourly.
+# Special case:
+#   '-%Y%m%d': default value for all except '-%Y%m%d%H' for hourly
 #
 # Default: '-%Y%m%d'.
 logrotate_date_format: '-%Y%m%d'
@@ -259,17 +288,18 @@ logrotate_date_hour_ago: false
 # Mail
 ###############################################################################
 
-# When log is rotated out of existence mail to address. Default: '' (disables).
+# When log is rotated out of existence mail to address. Default: '' (disabled).
 logrotate_mail: ''
 
 # Mail the just rotated file instead of the about to expire file.
-# about to expired file is mailed by default.
+#
+# The about to expired file is mailed by default.
 #
 # Default: False.
 logrotate_mail_first: false
 
-### additional config files
 # Include file or directory for additional inline logrotate configuration.
+#
 # Files in directories are read in alphabetic order. logrotate_taboo_ext
 # and logrotate_taboo_pattern exclude filters apply.
 #
@@ -314,15 +344,15 @@ logrotate_pre_remove: ''
 # Configure logrotate per service (logrotate.d).
 #
 # logrotate_local:
-#     list of dict definitions for logrotate local configuration.
+#     list of dict - logrotate local configuration.
 #   - service: str - name of local service config (/etc/logrotate.d/{NAME})
 #     state: str - whether config should be managed or removed
 #         Values:
 #           present: manage configuration
-#           absent: remove configuration
-#       Default: 'present'.
+#            absent: remove configuration
+#         Default: 'present'.
 #     config:
-#         list of dicts logs to manage. Required if state is present.
+#         list of dict - logs to manage. Required if state is present.
 #       - logs: list of str - log locations to apply config to
 #         rotate: dict - options (from global config) sans logrotate_
 #             All variables in global options may be used here.
@@ -377,7 +407,7 @@ logrotate_pre_remove: ''
 #  - service: 'ufw'
 #    state: 'absent'
 #
-# Default: [] (unmanaged).
+# Default: [] (un-managed).
 #
 # Reference:
 # * https://manpages.debian.org/bookworm/logrotate/logrotate.8.en.html
