@@ -1,4 +1,5 @@
 ---
+# Ensure no runtime errors as it is just a lightweight template wrapper.
 dependency:
   name: 'galaxy'
 driver:
@@ -11,14 +12,38 @@ provisioner:
       callback_whitelist: 'profile_tasks, timer, yaml'
     ssh_connection:
       pipelining: false
+  inventory:
+    group_vars:
+      all:
+        logrotate_local:
+          - service: 'dpkg'
+            state: 'absent'
+          - service: 'apt'
+            state: 'present'
+            config:
+              - logs:
+                  - '/var/log/apt/term.log'
+                rotate:
+                  count: 12
+                  period: 'monthly'
+                  compress: true
+                  missing_ok: true
+                  if_empty: false
+              - logs:
+                  - '/var/log/apt/history.log'
+                  - '/var/log/apt/multi-logs-format-test.log'
+                rotate:
+                  count: 12
+                  period: 'monthly'
+                  compress: true
+                  missing_ok: true
+                  if_empty: false
 platforms:
-  - name: 'debian-12'
+  - name: 'logrotate-debian-12-default'
     image: 'ghcr.io/hifis-net/debian-systemd:12'
     systemd: 'always'
     volumes:
       - '/sys/fs/cgroup:/sys/fs/cgroup:ro'
-    capabilities:
-      - 'SYS_ADMIN'
     command: '/lib/systemd/systemd'
     pre_build_image: true
 verifier:
@@ -27,3 +52,17 @@ lint: |
   set -e
   yamllint .
   ansible-lint .
+scenario:
+  test_sequence:
+    # - 'dependency'
+    # - 'cleanup'
+    - 'destroy'
+    - 'syntax'
+    - 'create'
+    # - 'prepare'
+    - 'converge'
+    - 'idempotence'
+    # - 'side_effect'
+    - 'verify'
+    # - 'cleanup'
+    - 'destroy'

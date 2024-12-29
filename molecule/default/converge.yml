@@ -1,43 +1,8 @@
 ---
-# Role variable returned variables are scoped to the current play only (e.g.
-# converge.yml) and must be tested between each application of the role. Test
-# these values while converging versus verify.yml (where scoping will prevent)
-# testing these values.
-#
-# Idempotent testing disabled as specific commands will never be idempotent.
-#
-# Reference:
-# * https://github.com/ansible/molecule/issues/816
-
 - name: 'Default | converge'
-  hosts: all
-  gather_facts: true
-  tags: 'molecule-idempotence-notest'
+  hosts: 'all'
+  gather_facts: false
   tasks:
-    - name: 'Default | converge | configure logrotate'
+    - name: 'Default | converge | apply r_pufky.srv.logrotate'
       ansible.builtin.include_role:
         name: 'r_pufky.srv.logrotate'
-      vars:
-        logrotate_local:
-          - service: 'dpkg'
-            state: 'absent'
-          - service: 'apt'
-            state: 'present'
-            config:
-              - logs:
-                  - '/var/log/apt/term.log'
-                rotate:
-                  count: 12
-                  period: 'monthly'
-                  compress: true
-                  missing_ok: true
-                  if_empty: false
-              - logs:
-                  - '/var/log/apt/history.log'
-                  - '/var/log/apt/multi-logs-format-test.log'
-                rotate:
-                  count: 12
-                  period: 'monthly'
-                  compress: true
-                  missing_ok: true
-                  if_empty: false
