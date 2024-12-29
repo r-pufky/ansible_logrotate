@@ -1,5 +1,6 @@
 ---
 # yamllint disable rule:line-length
+# All values are defaulted just ensure no runtime errors.
 - name: 'Default | verify | absent state removes file'
   hosts: 'all'
   gather_facts: false
