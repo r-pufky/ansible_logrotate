@@ -11,3 +11,4 @@
   loop: '{{ logrotate_local | default([]) }}'
   loop_control:
     loop_var: local
+    label: '{{ local.service }}'

@@ -14,8 +14,8 @@
 # Rotate number of times before removing or mailing.
 #
 # Values:
-#   -1: old logs not removed (still affected by logrotate_max_age)
-#    0: old logs removed
+#   -1: Old logs not removed (still affected by logrotate_max_age).
+#    0: Old logs removed.
 #
 # Default: 3
 logrotate_count: 3
@@ -27,8 +27,8 @@ logrotate_old_dir: ''
 #
 # logrotate_su:
 #     dict - user and group definitions.
-#   user: str or int - user name or UID
-#   group: str or int - group name or GID
+#   user: str or int - user name or UID.
+#   group: str or int - group name or GID.
 #
 # logrotate_su:
 #   user: 'logs'
@@ -44,22 +44,22 @@ logrotate_su: {}
 # Rotation frequency.
 #
 # Values:
-#            hourly: rotated every hour
-#             daily: rotated every day
-#  weekly [weekday]: rotated once on specified weekday
+#            hourly: Rotated every hour.
+#             daily: Rotated every day.
+#  weekly [weekday]: Rotated once on specified weekday.
 #                        Values: weekday
 #                              0-6: Sunday through Saturday
-#                                7: each day
-#                             omit: default Sunday
-#                          monthly: rotated the first time logrotate is run in
+#                                7: Each day
+#                             omit: Default Sunday
+#                          monthly: Rotated the first time logrotate is run in
 #                                   a month.
-#                           yearly: rotated if current year is not the same as
+#                           yearly: Rotated if current year is not the same as
 #                                   last rotation.
-#     size[postfix]: rotated only if they grow bigger than size bytes
+#     size[postfix]: Rotated only if they grow bigger than size bytes.
 #                        Values: postfix
-#                          k: kilobytes
-#                          M: megabytes
-#                          G: gigabytes
+#                          k: Kilobytes.
+#                          M: Megabytes.
+#                          G: Gigabytes.
 #
 # logrotate_period: 'weekly 3'
 # logrotate_period: '100M'
@@ -155,9 +155,9 @@ logrotate_taboo_pattern_append: false
 # Create new log file immediate after rotation before postrotate).
 #
 # Values:
-#                              '': disables create (sets 'nocreate')
-#                          create: use same permissions as last log file
-#   create [mode] [owner] [group]: explicitly set log file permissions
+#                              '': Disables create (sets 'nocreate').
+#                          create: Use same permissions as last log file.
+#   create [mode] [owner] [group]: Explicitly set log file permissions.
 #
 # logrotate_create: 'create 0755 logs logs'
 # logrotate_create: 'create 0755 1000 1000'
@@ -170,9 +170,9 @@ logrotate_create: ''
 #
 # logrotate_create_old_dir:
 #     dict - file permission definition.
-#   mode: octal directory permissions
-#   user: user name or UID
-#   group: group name or GID
+#   mode: Octal directory permissions.
+#   user: User name or UID.
+#   group: Group name or GID.
 #
 # logrotate_create_old_dir:
 #   mode: '0755'
@@ -269,7 +269,7 @@ logrotate_date_ext: false
 # filenames to find out which logfiles are older and should be removed.
 #
 # Special case:
-#   '-%Y%m%d': default value for all except '-%Y%m%d%H' for hourly
+#   '-%Y%m%d': Default value for all except '-%Y%m%d%H' for hourly.
 #
 # Default: '-%Y%m%d'.
 logrotate_date_format: '-%Y%m%d'
@@ -345,16 +345,16 @@ logrotate_pre_remove: ''
 #
 # logrotate_local:
 #     list of dict - logrotate local configuration.
-#   - service: str - name of local service config (/etc/logrotate.d/{NAME})
-#     state: str - whether config should be managed or removed
+#   - service: str - Name of local service config (/etc/logrotate.d/{NAME}).
+#     state: str - Whether config should be managed or removed.
 #         Values:
-#           present: manage configuration
-#            absent: remove configuration
+#           present: Manage configuration.
+#            absent: Remove configuration.
 #         Default: 'present'.
 #     config:
-#         list of dict - logs to manage. Required if state is present.
-#       - logs: list of str - log locations to apply config to
-#         rotate: dict - options (from global config) sans logrotate_
+#         list of dict - Logs to manage. Required if state is present.
+#       - logs: list of str - Log locations to apply config to.
+#         rotate: dict - Options (from global config) sans logrotate_.
 #             All variables in global options may be used here.
 #           Default: omit (system default).
 #
