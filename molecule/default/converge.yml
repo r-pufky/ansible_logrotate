@@ -3,6 +3,6 @@
   hosts: 'all'
   gather_facts: false
   tasks:
-    - name: 'Default | converge | apply r_pufky.srv.logrotate'
+    - name: 'Default | converge | apply r_pufky.deb.logrotate'
       ansible.builtin.include_role:
-        name: 'r_pufky.srv.logrotate'
+        name: 'r_pufky.deb.logrotate'

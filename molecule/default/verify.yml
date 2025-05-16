@@ -1,58 +1,48 @@
 ---
-# yamllint disable rule:line-length
 - name: 'Default | verify | absent state removes file'
   hosts: 'all'
   gather_facts: false
   tasks:
-    - name: 'Default | verify | absent state removes file | query dpkg'
-      ansible.builtin.stat:
-        path: '/etc/logrotate.d/dpkg'
-      register: _test_logrotate_dpkg
-
-    - name: 'Default | verify | absent state removes file | assert dpkg removed'
-      ansible.builtin.assert:
-        that:
-          - not _test_logrotate_dpkg.stat.exists
-        fail_msg: '/etc/logrotate.d/dpkg should have been removed.'
+    - name: 'Default | verify | absent state removes file | dpkg'
+      ansible.builtin.include_role:
+        name: 'r_pufky.lib.tests'
+        tasks_from: 'file.yml'
+      vars:
+        test_name: 'Default | verify | absent state removes file | dpkg'
+        test_file: '/etc/logrotate.d/dpkg'
+        test_owner: '{{ omit }}'
+        test_group: '{{ omit }}'
+        test_mode: '{{ omit }}'
+        test_state: 'absent'
 
 - name: 'Default | verify | global configuration'
   hosts: 'all'
   gather_facts: false
   tasks:
-    - name: 'Default | verify | global configuration | query global expected config'
-      ansible.builtin.copy:
-        src: 'files/logrotate.conf'
-        dest: '/etc/logrotate.conf'
-        owner: 'root'
-        group: 'root'
-        mode: '0644'
-      check_mode: true
-      diff: true
-      register: _test_logrotate_global
-
-    - name: 'Default | verify | global configuration | assert global config'
-      ansible.builtin.assert:
-        that:
-          - not _test_logrotate_global.changed
-        fail_msg: '/etc/logrotate.conf is not in expected format: {{ _test_logrotate_global.diff }}.'
+    - name: 'Default | verify | global configuration | logrotate.conf'
+      ansible.builtin.include_role:
+        name: 'r_pufky.lib.tests'
+        tasks_from: 'copy.yml'
+      vars:
+        test_name: 'Default | verify | global configuration | logrotate.conf'
+        test_src: 'files/logrotate.conf'
+        test_file: '/etc/logrotate.conf'
+        test_owner: 'root'
+        test_group: 'root'
+        test_mode: '0644'
 
 - name: 'Default | verify | local configuration'
   hosts: 'all'
   gather_facts: false
   tasks:
-    - name: 'Default | verify | local configuration | query local expected config'
-      ansible.builtin.copy:
-        src: 'files/apt'
-        dest: '/etc/logrotate.d/apt'
-        owner: 'root'
-        group: 'root'
-        mode: '0644'
-      check_mode: true
-      diff: true
-      register: _test_logrotate_local
-
-    - name: 'Default | verify | local configuration | assert local config'
-      ansible.builtin.assert:
-        that:
-          - not _test_logrotate_local.changed
-        fail_msg: '/etc/logrotate.d/apt is not in expected format" {{ _test_logrotate_local.diff }}.'
+    - name: 'Default | verify | local configuration | logrotate.conf'
+      ansible.builtin.include_role:
+        name: 'r_pufky.lib.tests'
+        tasks_from: 'copy.yml'
+      vars:
+        test_name: 'Default | verify | local configuration | logrotate.conf'
+        test_src: 'files/apt'
+        test_file: '/etc/logrotate.d/apt'
+        test_owner: 'root'
+        test_group: 'root'
+        test_mode: '0644'

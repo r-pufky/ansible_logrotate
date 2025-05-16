@@ -1,5 +1,12 @@
 ---
+###############################################################################
+# Default
+###############################################################################
 # Ensure no runtime errors as it is just a lightweight template wrapper.
+#
+# Tests:
+# * Ensure no run-time errors.
+
 dependency:
   name: 'galaxy'
 driver:

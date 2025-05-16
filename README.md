@@ -8,8 +8,8 @@ Manage logrotate configuration.
 [defaults](https://github.com/r-pufky/ansible_logrotate/blob/main/defaults/main.yml)
 
 ## Dependencies
-Part of the [r_pufky.srv](https://github.com/r-pufky/ansible_collection_srv)
-collection.
+**galaxy-ng** roles cannot be used independently. Part of
+[r_pufky.deb](https://github.com/r-pufky/ansible_collection_deb) collection.
 
 ## Example Playbook
 Logrotate configuration may be managed on the global and per service level, as
@@ -76,11 +76,11 @@ Apply the role
 ``` yaml
 - name: 'Manage logrotate'
   ansible.builtin.include_role:
-    name: 'r_pufky.srv.logrotate'
+    name: 'r_pufky.deb.logrotate'
 ```
 
 ## Development
-Configure [environment](https://github.com/r-pufky/ansible_collection_srv/blob/main/docs/dev/environment/README.md)
+Configure [environment](https://github.com/r-pufky/ansible_collection_docs/blob/main/dev/environment/README.md)
 
 Run all unit tests:
 ``` bash
