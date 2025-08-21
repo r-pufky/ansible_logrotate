@@ -10,7 +10,7 @@
 #   config: dict - logrotate config, see defaults.yml
 #
 # Reference:
-# * https://manpages.debian.org/bookworm/logrotate/logrotate.8.en.html
+# * https://manpages.debian.org/trixie/logrotate/logrotate.8.en.html
 
 - name: 'Local | remove local config {{ service }}'
   when: state | lower == 'absent'

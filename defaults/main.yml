@@ -5,7 +5,7 @@
 # Configure global logrotate defaults.
 #
 # Reference:
-# * https://manpages.debian.org/bookworm/logrotate/logrotate.8.en.html
+# * https://manpages.debian.org/trixie/logrotate/logrotate.8.en.html
 
 ###############################################################################
 # Rotation
@@ -104,6 +104,7 @@ logrotate_max_size: 0
 #
 # Default:
 #   - ',v'
+#   - '.bak'
 #   - '.cfsaved'
 #   - '.disabled'
 #   - '.dpkg-bak'
@@ -111,6 +112,10 @@ logrotate_max_size: 0
 #   - '.dpkg-dist'
 #   - '.dpkg-new'
 #   - '.dpkg-old'
+#   - '.dpkg-tmp'
+#   - '.new'
+#   - '.old'
+#   - '.orig'
 #   - '.rhn-cfg-tmp-*'
 #   - '.rpmnew'
 #   - '.rpmorig'
@@ -122,6 +127,7 @@ logrotate_max_size: 0
 #   - '~'
 logrotate_taboo_ext:
   - ',v'
+  - '.bak'
   - '.cfsaved'
   - '.disabled'
   - '.dpkg-bak'
@@ -129,6 +135,10 @@ logrotate_taboo_ext:
   - '.dpkg-dist'
   - '.dpkg-new'
   - '.dpkg-old'
+  - '.dpkg-tmp'
+  - '.new'
+  - '.old'
+  - '.orig'
   - '.rhn-cfg-tmp-*'
   - '.rpmnew'
   - '.rpmorig'
@@ -260,7 +270,7 @@ logrotate_date_ext: false
 #
 # Date format specification similar to strftime(3).
 #
-# Only %Y %m %d %H %M %S %V and %s specifiers are allowed.
+# Only %Y %m %d %H %M %S %V %s, and %z specifiers are allowed.
 #
 # Datestamps generate by this option must be lexically sortable (that is first
 # the year, then the month then the day. For example 2001/12/01 is ok, but
@@ -410,5 +420,5 @@ logrotate_pre_remove: ''
 # Default: [] (un-managed).
 #
 # Reference:
-# * https://manpages.debian.org/bookworm/logrotate/logrotate.8.en.html
+# * https://manpages.debian.org/trixie/logrotate/logrotate.8.en.html
 logrotate_local: []

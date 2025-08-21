@@ -12,7 +12,7 @@
 #    SELinux support: yes
 #
 # Reference:
-# * https://manpages.debian.org/bookworm/logrotate/logrotate.8.en.html
+# * https://manpages.debian.org/trixie/logrotate/logrotate.8.en.html
 
 - name: 'Global | set global config'
   ansible.builtin.template:
