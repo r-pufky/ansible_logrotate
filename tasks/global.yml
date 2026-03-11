@@ -14,7 +14,7 @@
 # Reference:
 # * https://manpages.debian.org/trixie/logrotate/logrotate.8.en.html
 
-- name: 'Global | set global config'
+- name: 'Global | filesystem | set /etc/logrotate.conf'
   ansible.builtin.template:
     src: 'global.conf.j2'
     dest: '/etc/logrotate.conf'

@@ -1,43 +1,41 @@
 ---
 ###############################################################################
-# Logrotate (Global Configuration)
+# Config
 ###############################################################################
 # Configure global logrotate defaults.
 #
 # Reference:
 # * https://manpages.debian.org/trixie/logrotate/logrotate.8.en.html
 
-###############################################################################
 # Rotation
 ###############################################################################
 
 # Rotate number of times before removing or mailing.
 #
 # Values:
-#   -1: Old logs not removed (still affected by logrotate_max_age).
+#   -1: Old logs not removed (still affected by logrotate_cfg_max_age).
 #    0: Old logs removed.
 #
 # Default: 3
-logrotate_count: 3
+logrotate_cfg_count: 3
 
 # Move rotated logs into specified directory. Default: '' (disabled).
-logrotate_old_dir: ''
+logrotate_cfg_old_dir: ''
 
 # Rotate log files under specified user and group.
 #
-# logrotate_su:
+# logrotate_cfg_su:
 #     dict - user and group definitions.
 #   user: str or int - user name or UID.
 #   group: str or int - group name or GID.
 #
-# logrotate_su:
+# logrotate_cfg_su:
 #   user: 'logs'
 #   group: 'logs'
 #
 # Default: {}.
-logrotate_su: {}
+logrotate_cfg_su: {}
 
-###############################################################################
 # Frequency
 ###############################################################################
 
@@ -61,44 +59,43 @@ logrotate_su: {}
 #                          M: Megabytes.
 #                          G: Gigabytes.
 #
-# logrotate_period: 'weekly 3'
-# logrotate_period: '100M'
+# logrotate_cfg_period: 'weekly 3'
+# logrotate_cfg_period: '100M'
 #
 # Default: 'daily'.
-logrotate_period: 'daily'
+logrotate_cfg_period: 'daily'
 
-###############################################################################
 # File Selection
 ###############################################################################
 
 # If log file is missing skip error message. Default: False.
-logrotate_missing_ok: false
+logrotate_cfg_missing_ok: false
 
 # Ignore any following matches of a log file. Default: False.
-logrotate_ignore_duplicates: false
+logrotate_cfg_ignore_duplicates: false
 
 # Rotate log file even if it is empty. Default: True.
-logrotate_if_empty: true
+logrotate_cfg_if_empty: true
 
 # Do not rotate logs less then minimum age (days). Default: 0 (disabled).
-logrotate_min_age: 0
+logrotate_cfg_min_age: 0
 
 # Remove rotated logs older than maximum age (days). Default: 0 (disabled).
-logrotate_max_age: 0
+logrotate_cfg_max_age: 0
 
 # Log files are rotated when they grow bigger than size bytes.
 #
 # Not before additionally specified time interval.
 #
 # Default: 0 (disabled).
-logrotate_min_size: 0
+logrotate_cfg_min_size: 0
 
 # Log files are rotated when they grow bigger than size bytes.
 #
 # Before additionally specified time interval.
 #
 # Default: 0 (disabled).
-logrotate_max_size: 0
+logrotate_cfg_max_size: 0
 
 # Taboo extensions are excluded from processing.
 #
@@ -125,7 +122,7 @@ logrotate_max_size: 0
 #   - '.ucf-new'
 #   - '.ucf-old'
 #   - '~'
-logrotate_taboo_ext:
+logrotate_cfg_taboo_ext:
   - ',v'
   - '.bak'
   - '.cfsaved'
@@ -150,15 +147,14 @@ logrotate_taboo_ext:
   - '~'
 
 # Append taboo extensions to existing list or replace? Default: False.
-logrotate_taboo_ext_append: false
+logrotate_cfg_taboo_ext_append: false
 
 # Taboo glob pattern list to exclude processing. Default: [].
-logrotate_taboo_pattern: []
+logrotate_cfg_taboo_pattern: []
 
 # Append taboo glob pattern list to existing list or replace? Default: False.
-logrotate_taboo_pattern_append: false
+logrotate_cfg_taboo_pattern_append: false
 
-###############################################################################
 # Files and Folders
 ###############################################################################
 
@@ -169,104 +165,102 @@ logrotate_taboo_pattern_append: false
 #                          create: Use same permissions as last log file.
 #   create [mode] [owner] [group]: Explicitly set log file permissions.
 #
-# logrotate_create: 'create 0755 logs logs'
-# logrotate_create: 'create 0755 1000 1000'
-# logrotate_create: 'create logs logs'
+# logrotate_cfg_create: 'create 0755 logs logs'
+# logrotate_cfg_create: 'create 0755 1000 1000'
+# logrotate_cfg_create: 'create logs logs'
 #
 # Default: 'create'.
-logrotate_create: ''
+logrotate_cfg_create: ''
 
-# Create logrotate_old_dir if not existing?
+# Create logrotate_cfg_old_dir if not existing?
 #
-# logrotate_create_old_dir:
+# logrotate_cfg_create_old_dir:
 #     dict - file permission definition.
 #   mode: Octal directory permissions.
 #   user: User name or UID.
 #   group: Group name or GID.
 #
-# logrotate_create_old_dir:
+# logrotate_cfg_create_old_dir:
 #   mode: '0755'
 #   user: 'logs'
 #   group: 'logs'
 #
 # Default: {} (disabled).
-logrotate_create_old_dir: {}
+logrotate_cfg_create_old_dir: {}
 
 # Make a copy of log file and don't change original. Default: False.
-logrotate_copy: false
+logrotate_cfg_copy: false
 
 # Truncate original log file after copying. Default: False.
-logrotate_copy_truncate: false
+logrotate_cfg_copy_truncate: false
 
 # Rename log with .tmp extension, run postrotate, then copy to final name?
 #
 # Default: False.
-logrotate_rename_copy: false
+logrotate_cfg_rename_copy: false
 
 # Delete logs using 'shred -u' instead of unlink. Default: False.
-logrotate_shred: false
+logrotate_cfg_shred: false
 
-# Number of shred cycles to perform for logrotate_shred.
+# Number of shred cycles to perform for logrotate_cfg_shred.
 #
 # Default: 0 (use shred default).
-logrotate_shred_cycles_count: 0
+logrotate_cfg_shred_cycles_count: 0
 
 # Rotate using hard links. Default: False.
-logrotate_allowed_hard_link: false
+logrotate_cfg_allowed_hard_link: false
 
-###############################################################################
 # Compression
 ###############################################################################
 
 # Compress logs to save space on rotate? Default: False.
-logrotate_compress: false
+logrotate_cfg_compress: false
 
 # Command used to compress logs. Default: '/bin/gzip'.
-logrotate_compress_cmd: '/bin/gzip'
+logrotate_cfg_compress_cmd: '/bin/gzip'
 
 # Command used to compress logs. Default: '/bin/gunzip'.
-logrotate_uncompress_cmd: '/bin/gunzip'
+logrotate_cfg_uncompress_cmd: '/bin/gunzip'
 
 # Extension to use on compressed log files. Default: '.gz'.
-logrotate_compress_ext: '.gz'
+logrotate_cfg_compress_ext: '.gz'
 
 # Compression command options. Default: '-6'.
-logrotate_compress_options: '-6'
+logrotate_cfg_compress_options: '-6'
 
 # Delay compression of previous log file to next rotation. Default: False.
-logrotate_delay_compress: false
+logrotate_cfg_delay_compress: false
 
-###############################################################################
 # Filenames
 ###############################################################################
 
 # Log files with this extension can keep it after rotation.
 #
 # Default: '' (default).
-logrotate_extension: ''
+logrotate_cfg_extension: ''
 
 # Log files are given this final extension after rotation.
 #
 # Default: '' (default).
-logrotate_add_extension: ''
+logrotate_cfg_add_extension: ''
 
 # Starting number for rotation.
 #
 # If 0, logs will be created with .0, .1, etc. as they are rotated. They will
-# still be rotated the number of times in logrotate_count.
+# still be rotated the number of times in logrotate_cfg_count.
 #
 # Default: 1.
-logrotate_start: 1
+logrotate_cfg_start: 1
 
 # Rotate logs adding a date extension instead of a number.
 #
-# Date extension configured in logrotate_date_format and
-# logrotate_date_yesterday.
+# Date extension configured in logrotate_cfg_date_format and
+# logrotate_cfg_date_yesterday.
 #
 # Default: False.
-logrotate_date_ext: false
+logrotate_cfg_date_ext: false
 
-# Specify the extension for logrotate_date_ext.
+# Specify the extension for logrotate_cfg_date_ext.
 #
 # Date format specification similar to strftime(3).
 #
@@ -282,43 +276,41 @@ logrotate_date_ext: false
 #   '-%Y%m%d': Default value for all except '-%Y%m%d%H' for hourly.
 #
 # Default: '-%Y%m%d'.
-logrotate_date_format: '-%Y%m%d'
+logrotate_cfg_date_format: '-%Y%m%d'
 
-# Use yesterday instead of today's date to create logrotate_date_ext.
+# Use yesterday instead of today's date to create logrotate_cfg_date_ext.
 #
 # Default: False.
-logrotate_date_yesterday: false
+logrotate_cfg_date_yesterday: false
 
-# Use hour ago instead of current date to create logrotate_date_ext.
+# Use hour ago instead of current date to create logrotate_cfg_date_ext.
 #
 # Default: False.
-logrotate_date_hour_ago: false
+logrotate_cfg_date_hour_ago: false
 
-###############################################################################
 # Mail
 ###############################################################################
 
 # When log is rotated out of existence mail to address. Default: '' (disabled).
-logrotate_mail: ''
+logrotate_cfg_mail: ''
 
 # Mail the just rotated file instead of the about to expire file.
 #
 # The about to expired file is mailed by default.
 #
 # Default: False.
-logrotate_mail_first: false
+logrotate_cfg_mail_first: false
 
 # Include file or directory for additional inline logrotate configuration.
 #
-# Files in directories are read in alphabetic order. logrotate_taboo_ext
-# and logrotate_taboo_pattern exclude filters apply.
+# Files in directories are read in alphabetic order. logrotate_cfg_taboo_ext
+# and logrotate_cfg_taboo_pattern exclude filters apply.
 #
 # This is defined at the end of logrotate.conf.
 #
 # Default: '/etc/logrotate.d'
-logrotate_include: '/etc/logrotate.d'
+logrotate_cfg_include: '/etc/logrotate.d'
 
-###############################################################################
 # Scripts
 ###############################################################################
 # Scripts are executed with /bin/sh. The script inherits some traits from the
@@ -331,29 +323,29 @@ logrotate_include: '/etc/logrotate.d'
 # If disabled these are run for every log.
 #
 # Default: False.
-logrotate_shared_scripts: false
+logrotate_cfg_shared_scripts: false
 
 # Execute script once before all log files are rotated. Default: ''.
-logrotate_first_action: ''
+logrotate_cfg_first_action: ''
 
 # Execute script once after all log files are rotated. Default: ''.
-logrotate_last_action: ''
+logrotate_cfg_last_action: ''
 
 # Execute script if log will actually be rotated. Default: ''.
-logrotate_pre_rotate: ''
+logrotate_cfg_pre_rotate: ''
 
 # Execute script after log file is rotated. Default: ''.
-logrotate_post_rotate: ''
+logrotate_cfg_post_rotate: ''
 
 # Execute script once just before removal of log file. Default: ''.
-logrotate_pre_remove: ''
+logrotate_cfg_pre_remove: ''
 
 ###############################################################################
-# Logrotate (Local Configuration)
+# Local Config (logrotate.d)
 ###############################################################################
 # Configure logrotate per service (logrotate.d).
 #
-# logrotate_local:
+# logrotate_cfg_local:
 #     list of dict - logrotate local configuration.
 #   - service: str - Name of local service config (/etc/logrotate.d/{NAME}).
 #     state: str - Whether config should be managed or removed.
@@ -364,11 +356,11 @@ logrotate_pre_remove: ''
 #     config:
 #         list of dict - Logs to manage. Required if state is present.
 #       - logs: list of str - Log locations to apply config to.
-#         rotate: dict - Options (from global config) sans logrotate_.
+#         rotate: dict - Options (from global config) sans logrotate_cfg_.
 #             All variables in global options may be used here.
 #           Default: omit (system default).
 #
-# logrotate_local:
+# logrotate_cfg_local:
 #   - service: 'apt'
 #     state: 'present'
 #     config:
@@ -421,4 +413,4 @@ logrotate_pre_remove: ''
 #
 # Reference:
 # * https://manpages.debian.org/trixie/logrotate/logrotate.8.en.html
-logrotate_local: []
+logrotate_cfg_local: []

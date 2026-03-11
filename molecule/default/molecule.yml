@@ -2,7 +2,7 @@
 ###############################################################################
 # Default
 ###############################################################################
-# Ensure no runtime errors as it is just a lightweight template wrapper.
+# Default configuration is deployed successfully.
 #
 # Tests:
 # * Ensure no run-time errors.
@@ -22,7 +22,7 @@ provisioner:
   inventory:
     group_vars:
       all:
-        logrotate_local:
+        logrotate_cfg_local:
           - service: 'dpkg'
             state: 'absent'
           - service: 'apt'
@@ -46,7 +46,7 @@ provisioner:
                   missing_ok: true
                   if_empty: false
 platforms:
-  - name: 'logrotate-debian-13-default'
+  - name: 'logrotate-default'
     image: 'ghcr.io/hifis-net/debian-systemd:13'
     systemd: 'always'
     volumes:
@@ -55,21 +55,12 @@ platforms:
     pre_build_image: true
 verifier:
   name: 'ansible'
-lint: |
-  set -e
-  yamllint .
-  ansible-lint .
 scenario:
   test_sequence:
-    # - 'dependency'
-    # - 'cleanup'
     - 'destroy'
     - 'syntax'
     - 'create'
-    # - 'prepare'
     - 'converge'
     - 'idempotence'
-    # - 'side_effect'
     - 'verify'
-    # - 'cleanup'
     - 'destroy'

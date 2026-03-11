@@ -12,17 +12,17 @@
 # Reference:
 # * https://manpages.debian.org/trixie/logrotate/logrotate.8.en.html
 
-- name: 'Local | remove local config {{ service }}'
+- name: '{{ "Local | filesystem | remove /etc/logrotate.d/" ~ service }}'
   when: state | lower == 'absent'
   ansible.builtin.file:
-    path: '/etc/logrotate.d/{{ service }}'
+    path: '{{ "/etc/logrotate.d/" ~ service }}'
     state: 'absent'
 
-- name: 'Local | set local config {{ service }}'
+- name: '{{ "Local | filesystem | set /etc/logrotate.d/" ~ service }}'
   when: state | lower == 'present'
   ansible.builtin.template:
     src: 'local.conf.j2'
-    dest: '/etc/logrotate.d/{{ service }}'
+    dest: '{{ "/etc/logrotate.d/" ~ service }}'
     owner: 'root'
     group: 'root'
     mode: '0644'

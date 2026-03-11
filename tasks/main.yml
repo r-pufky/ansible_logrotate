@@ -8,7 +8,7 @@
     service: '{{ local.service }}'
     state: '{{ local.state | default("present") }}'
     config: '{{ local.config }}'
-  loop: '{{ logrotate_local | default([]) }}'
+  loop: '{{ logrotate_cfg_local | default([]) }}'
   loop_control:
     loop_var: 'local'
     label: '{{ local.service }}'

@@ -1,31 +1,27 @@
 ---
-- name: 'Verify | absent state removes file'
+- name: 'Verify'
   hosts: 'all'
   gather_facts: false
   tasks:
-    - name: 'Verify | absent state removes file | dpkg'
+    - name: 'Verify | test | /etc/logrotate.d/dpkg'
       ansible.builtin.include_role:
-        name: 'r_pufky.lib.tests'
+        name: 'r_pufky.data.test'
         tasks_from: 'file.yml'
       vars:
-        test_name: 'Verify | absent state removes file | dpkg'
+        test_name: 'Verify | test | /etc/logrotate.d/dpkg'
         test_file: '/etc/logrotate.d/dpkg'
-        test_owner: '{{ omit }}'
-        test_group: '{{ omit }}'
-        test_mode: '{{ omit }}'
+        test_owner: 'root'
+        test_group: 'root'
+        test_mode: '0644'
         test_state: 'absent'
         test_diff: true
 
-- name: 'Verify | global configuration'
-  hosts: 'all'
-  gather_facts: false
-  tasks:
-    - name: 'Verify | global configuration | logrotate.conf'
+    - name: 'Verify | test | /etc/logrotate.conf'
       ansible.builtin.include_role:
-        name: 'r_pufky.lib.tests'
+        name: 'r_pufky.data.test'
         tasks_from: 'copy.yml'
       vars:
-        test_name: 'Verify | global configuration | logrotate.conf'
+        test_name: 'Verify | test | /etc/logrotate.conf'
         test_src: 'files/logrotate.conf'
         test_file: '/etc/logrotate.conf'
         test_owner: 'root'
@@ -33,16 +29,12 @@
         test_mode: '0644'
         test_diff: true
 
-- name: 'Verify | local configuration'
-  hosts: 'all'
-  gather_facts: false
-  tasks:
-    - name: 'Verify | local configuration | logrotate.conf'
+    - name: 'Verify | test | /etc/logrotate.d/apt'
       ansible.builtin.include_role:
-        name: 'r_pufky.lib.tests'
+        name: 'r_pufky.data.test'
         tasks_from: 'copy.yml'
       vars:
-        test_name: 'Verify | local configuration | logrotate.conf'
+        test_name: 'Verify | test | /etc/logrotate.d/apt'
         test_src: 'files/apt'
         test_file: '/etc/logrotate.d/apt'
         test_owner: 'root'

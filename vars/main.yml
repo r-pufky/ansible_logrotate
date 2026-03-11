@@ -3,6 +3,8 @@
 # Logrotate Role Options
 ###############################################################################
 
-# Last time logrotate options were validated against a default configuration.
-logrotate_role_validate_date: '2025-08-21'
-logrotate_role_validate_release: 'trixie'
+logrotate_cfg___release: "{{ {} | r_pufky.data.v3(
+
+    _date='2026-03-10',
+    _debian='trixie',
+  ) }}"

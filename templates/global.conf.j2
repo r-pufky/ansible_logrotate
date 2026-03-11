@@ -4,176 +4,176 @@
 # global options do not affect preceding include directives
 
 # rotation
-rotate {{ logrotate_count | default('3') }}
-{% if logrotate_old_dir | length > 0 %}
-olddir {{ logrotate_old_dir }}
+rotate {{ logrotate_cfg_count | default('3') }}
+{% if logrotate_cfg_old_dir | length > 0 %}
+olddir {{ logrotate_cfg_old_dir }}
 {% else %}
 noolddir
 {% endif %}
-{% if logrotate_su | length > 0 %}
-su {{ logrotate_su.user }} {{ logrotate_su.group }}
+{% if logrotate_cfg_su | length > 0 %}
+su {{ logrotate_cfg_su.user }} {{ logrotate_cfg_su.group }}
 {% endif %}
 
 # frequency
-{{ logrotate_period | default('weekly') }}
+{{ logrotate_cfg_period | default('weekly') }}
 
 # file selection
-{% if logrotate_missing_ok %}
+{% if logrotate_cfg_missing_ok %}
 missingok
 {% else %}
 nomissingok
 {% endif %}
-{% if logrotate_ignore_duplicates %}
+{% if logrotate_cfg_ignore_duplicates %}
 ignoreduplicates
 {% endif %}
-{% if logrotate_if_empty %}
+{% if logrotate_cfg_if_empty %}
 ifempty
 {% else %}
 notifempty
 {% endif %}
-{% if logrotate_min_age %}
-minage {{ logrotate_min_age }}
+{% if logrotate_cfg_min_age %}
+minage {{ logrotate_cfg_min_age }}
 {% endif %}
-{% if logrotate_max_age %}
-maxage {{ logrotate_max_age }}
+{% if logrotate_cfg_max_age %}
+maxage {{ logrotate_cfg_max_age }}
 {% endif %}
-{% if logrotate_min_size %}
-minsize {{ logrotate_min_size }}
+{% if logrotate_cfg_min_size %}
+minsize {{ logrotate_cfg_min_size }}
 {% endif %}
-{% if logrotate_max_size %}
-maxsize {{ logrotate_max_size }}
+{% if logrotate_cfg_max_size %}
+maxsize {{ logrotate_cfg_max_size }}
 {% endif %}
-{% if logrotate_taboo_ext | length > 0 %}
-tabooext {% if logrotate_taboo_ext_append %}+{% endif %}{{ logrotate_taboo_ext | join(', ') }}
+{% if logrotate_cfg_taboo_ext | length > 0 %}
+tabooext {% if logrotate_cfg_taboo_ext_append %}+{% endif %}{{ logrotate_cfg_taboo_ext | join(', ') }}
 {% endif %}
-{% if logrotate_taboo_pattern | length > 0 %}
-tabooext {% if logrotate_taboo_pattern_append %}+{% endif %}{{ logrotate_taboo_pattern | join(', ') }}
+{% if logrotate_cfg_taboo_pattern | length > 0 %}
+tabooext {% if logrotate_cfg_taboo_pattern_append %}+{% endif %}{{ logrotate_cfg_taboo_pattern | join(', ') }}
 {% endif %}
 
 # files and folders
-{% if logrotate_create | length > 0 %}
-{{ logrotate_create }}
+{% if logrotate_cfg_create | length > 0 %}
+{{ logrotate_cfg_create }}
 {% else %}
 nocreate
 {% endif %}
-{% if logrotate_create_old_dir | length > 0 %}
-createolddir {{ logrotate_create_old_dir.mode }} {{ logrotate_create_old_dir.user }} {{ logrotate_create_old_dir.group }}
+{% if logrotate_cfg_create_old_dir | length > 0 %}
+createolddir {{ logrotate_cfg_create_old_dir.mode }} {{ logrotate_cfg_create_old_dir.user }} {{ logrotate_cfg_create_old_dir.group }}
 {% else %}
 nocreateolddir
 {% endif %}
-{% if logrotate_copy %}
+{% if logrotate_cfg_copy %}
 copy
 {% else %}
 nocopy
 {% endif %}
-{% if logrotate_copy_truncate %}
+{% if logrotate_cfg_copy_truncate %}
 copytruncate
 {% else %}
 nocopytruncate
 {% endif %}
-{% if logrotate_rename_copy %}
+{% if logrotate_cfg_rename_copy %}
 renamecopy
 {% else %}
 norenamecopy
 {% endif %}
-{% if logrotate_shred %}
+{% if logrotate_cfg_shred %}
 shred
 {% else %}
 noshred
 {% endif %}
-{% if logrotate_shred_cycles_count > 0 %}
-shredcycles {{ logrotate_shred_cycles_count }}
+{% if logrotate_cfg_shred_cycles_count > 0 %}
+shredcycles {{ logrotate_cfg_shred_cycles_count }}
 {% endif %}
-{% if logrotate_allowed_hard_link %}
+{% if logrotate_cfg_allowed_hard_link %}
 allowhardlink
 {% else %}
 noallowhardlink
 {% endif %}
 
 # compression
-{% if logrotate_compress %}
+{% if logrotate_cfg_compress %}
 compress
 {% else %}
 nocompress
 {% endif %}
-compresscmd {{ logrotate_compress_cmd | default('/bin/gzip') }}
-uncompresscmd {{ logrotate_uncompress_cmd | default('/bin/gunzip') }}
-compressext {{ logrotate_compress_ext | default('.gz') }}
-compressoptions {{ logrotate_compress_options | default('-6') }}
-{% if logrotate_delay_compress %}
+compresscmd {{ logrotate_cfg_compress_cmd | default('/bin/gzip') }}
+uncompresscmd {{ logrotate_cfg_uncompress_cmd | default('/bin/gunzip') }}
+compressext {{ logrotate_cfg_compress_ext | default('.gz') }}
+compressoptions {{ logrotate_cfg_compress_options | default('-6') }}
+{% if logrotate_cfg_delay_compress %}
 delaycompress
 {% else %}
 nodelaycompress
 {% endif %}
 
 # filenames
-{% if logrotate_extension %}
-extension {{ logrotate_extension }}
+{% if logrotate_cfg_extension %}
+extension {{ logrotate_cfg_extension }}
 {% endif %}
-{% if logrotate_add_extension %}
-addextension {{ logrotate_add_extension }}
+{% if logrotate_cfg_add_extension %}
+addextension {{ logrotate_cfg_add_extension }}
 {% endif %}
-{% if logrotate_start %}
-start {{ logrotate_start }}
+{% if logrotate_cfg_start %}
+start {{ logrotate_cfg_start }}
 {% endif %}
-{% if logrotate_date_ext %}
+{% if logrotate_cfg_date_ext %}
 dateext
 {% else %}
 nodateext
 {% endif %}
-{% if logrotate_date_format != '-%Y%m%d' %}
-dateformat {{ logrotate_date_format }}
+{% if logrotate_cfg_date_format != '-%Y%m%d' %}
+dateformat {{ logrotate_cfg_date_format }}
 {% endif %}
-{% if logrotate_date_yesterday %}
+{% if logrotate_cfg_date_yesterday %}
 dateyesterday
 {% endif %}
-{% if logrotate_date_hour_ago %}
+{% if logrotate_cfg_date_hour_ago %}
 datehourago
 {% endif %}
 
 # mail
-{% if logrotate_mail| length > 0 %}
-mail {{ logrotate_mail }}
+{% if logrotate_cfg_mail| length > 0 %}
+mail {{ logrotate_cfg_mail }}
 {% else %}
 nomail
 {% endif %}
-{% if logrotate_mail_first %}
+{% if logrotate_cfg_mail_first %}
 mailfirst
 {% else %}
 maillast
 {% endif %}
 
 # scripts
-{% if logrotate_shared_scripts %}
+{% if logrotate_cfg_shared_scripts %}
 sharedscripts
 {% else %}
 nosharedscripts
 {% endif %}
-{% if logrotate_first_action | length > 0%}
+{% if logrotate_cfg_first_action | length > 0 %}
 firstaction
-  {{ logrotate_first_action }}
+  {{ logrotate_cfg_first_action }}
 endscript
 {% endif %}
-{% if logrotate_last_action | length > 0%}
+{% if logrotate_cfg_last_action | length > 0 %}
 firstaction
-  {{ logrotate_last_action }}
+  {{ logrotate_cfg_last_action }}
 endscript
 {% endif %}
-{% if logrotate_pre_rotate | length > 0%}
+{% if logrotate_cfg_pre_rotate | length > 0 %}
 firstaction
-  {{ logrotate_pre_rotate }}
+  {{ logrotate_cfg_pre_rotate }}
 endscript
 {% endif %}
-{% if logrotate_post_rotate | length > 0%}
+{% if logrotate_cfg_post_rotate | length > 0 %}
 firstaction
-  {{ logrotate_post_rotate }}
+  {{ logrotate_cfg_post_rotate }}
 endscript
 {% endif %}
-{% if logrotate_pre_remove | length > 0%}
+{% if logrotate_cfg_pre_remove | length > 0 %}
 firstaction
-  {{ logrotate_pre_remove }}
+  {{ logrotate_cfg_pre_remove }}
 endscript
 {% endif %}
 
 # additional config files
-include {{ logrotate_include | default('/etc/logrotate.d') }}
+include {{ logrotate_cfg_include | default('/etc/logrotate.d') }}
