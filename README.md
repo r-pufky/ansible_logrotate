@@ -83,14 +83,14 @@ molecule test --all
 
 ### [Releases][b]
 
- Release | Debian | Ansible | Notes
----------|--------|---------|-------
- 3.x.x   | 13     | 2.20    | Ansible 2.20, semantic versioning.
- 2.x.x   | 13     | 2.18    | Migrate to Debian Trixie.
- 1.x.x   | 12     | 2.18    | Use standardized libraries.
- 0.x.x   | 12     | 2.18    | Migration from private repository.
+  Release | Debian | Ansible | Notes
+ ---------|--------|---------|-------
+  3.x.x   | 13     | 2.20    | Ansible 2.20, semantic versioning.
+  2.x.x   | 13     | 2.18    | Migrate to Debian Trixie.
+  1.x.x   | 12     | 2.18    | Use standardized libraries.
+  0.x.x   | 12     | 2.18    | Migration from private repository.
 
-### Issues
+## Issues
 Create a bug and provide as much information as possible.
 
 Associate pull requests with a submitted bug.
